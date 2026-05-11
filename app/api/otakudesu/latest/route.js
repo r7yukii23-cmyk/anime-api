@@ -7,7 +7,7 @@ export async function GET() {
     return Response.json({
       status: "success",
       statusCode: 200,
-      statusmessage:"OK",
+      statusmessage: "OK",
       creator: "YUE",
       message: "",
       count: data.length,
@@ -21,9 +21,5 @@ export async function GET() {
       message: err.message,
       data: []
     })
-  }
-}        completed: []
-      }
-    }, { status: 200 }) // biar gak 500 lagi
   }
 }
