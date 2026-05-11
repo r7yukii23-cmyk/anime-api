@@ -2,7 +2,7 @@ import { getAllAnime } from "@/lib/engine"
 
 export async function GET() {
   try {
-    const data = await getAllAnime(5) // batasi biar aman
+    const data = await getAllAnime(1) // batasi biar aman
 
     return Response.json({
       status: "success",
