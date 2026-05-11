@@ -9,7 +9,7 @@ export async function GET() {
   if (cached) {
     return Response.json({
       status: true,
-      creator:"YUE"
+      creator:"YUE",
       source: "cache",
       data: cached
     })
@@ -23,7 +23,7 @@ export async function GET() {
 
   return Response.json({
     status: true,
-    creator:"YUE"
+    creator:"YUE",
     source: "live",
     data
   })
