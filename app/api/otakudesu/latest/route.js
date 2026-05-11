@@ -5,7 +5,6 @@ export async function GET() {
   const key = "latest"
 
   try {
-    // 1. cek cache dulu
     const cached = getCache(key)
     if (cached) {
       return Response.json({
@@ -16,10 +15,8 @@ export async function GET() {
       })
     }
 
-    // 2. ambil data
     const data = await getLatestAnime()
 
-    // 3. simpan cache
     setCache(key, data)
 
     return Response.json({
@@ -30,12 +27,15 @@ export async function GET() {
     })
 
   } catch (err) {
-    console.log("ERROR API:", err.message)
+    console.log("API ERROR:", err.message)
 
     return Response.json({
       status: false,
-      error: "Failed to fetch latest anime",
-      detail: err.message
-    }, { status: 500 })
+      error: err.message,
+      data: {
+        ongoing: [],
+        completed: []
+      }
+    }, { status: 200 }) // biar gak 500 lagi
   }
 }
