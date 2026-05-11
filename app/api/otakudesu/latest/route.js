@@ -1,40 +1,28 @@
-import { getCache, setCache } from "@/lib/cache"
-import { getLatestAnime } from "@/lib/engine"
+import { getAllAnime } from "@/lib/engine"
 
 export async function GET() {
-  const key = "latest"
-
   try {
-    const cached = getCache(key)
-    if (cached) {
-      return Response.json({
-        status: true,
-        creator: "YUE",
-        source: "cache",
-        data: cached
-      })
-    }
-
-    const data = await getLatestAnime()
-
-    setCache(key, data)
+    const data = await getAllAnime(5) // batasi biar aman
 
     return Response.json({
-      status: true,
+      status: "success",
+      statusCode: 200,
+      statusmessage:"OK",
       creator: "YUE",
-      source: "live",
+      message: "",
+      count: data.length,
       data
     })
-
   } catch (err) {
-    console.log("API ERROR:", err.message)
-
     return Response.json({
-      status: false,
-      error: err.message,
-      data: {
-        ongoing: [],
-        completed: []
+      status: "error",
+      statusCode: 500,
+      creator: "YUE",
+      message: err.message,
+      data: []
+    })
+  }
+}        completed: []
       }
     }, { status: 200 }) // biar gak 500 lagi
   }
